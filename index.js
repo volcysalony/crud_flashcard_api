@@ -1,14 +1,25 @@
 import express from "express";
 
+import baralhoRoutes from "./rotas/baralhoRoutes.js";
+import flashcardRoutes from "./rotas/flashcardRoutes.js";
+
 const app = express();
-const port = 3000;
+
+const PORT = 3000;
 
 app.use(express.json());
 
+// rota principal
 app.get("/", (req, res) => {
-    res.send("Servidor espress funcionando!");
+    res.send({
+        message: "API Flashcards funcionando!"
+    });
 });
 
-app.listen(port, () => {
-    console.log(`Servidor rodando na porta ${port}`);
+// rotas
+app.use(baralhoRoutes);
+app.use(flashcardRoutes);
+
+app.listen(PORT, () => {
+    console.log(`Servidor rodando na porta ${PORT}`);
 });
